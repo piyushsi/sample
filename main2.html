@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="ques">
+        <div>Who is the President of India?</div>
+        <div class="option">
+            <span class="wrong">Piyush Sinha</span>
+            <span>Bhavishya Negi</span><br>
+            <span>Suraj Choudhury</span>
+            <span class="ans">Narendra Modi</span>
+        </div>
+
+    </div>
+    <script>
+		var objectImg = document.getElementById('sense_u')
+		document.addEventListener("keydown", event =>{
+			if (event.keyCode===38){
+				console.log('piyush');
+				objectImg.style.animation="MoveUpDown .45s ease "	
+			}
+		})
+		document.addEventListener("keyup", event =>{
+			if (event.keyCode===38){
+				console.log('piyush');
+				objectImg.style.animation="MoveDown .75s ease "	
+			}
+		})
+	</script>
+	<div class="words" contenteditable>
+    </div>
+
+   <!-- <button id="Rec">Recording</button> -->
+    <style>
+		.words {
+			display: none;
+		}
+        /* #Rec {
+            width: 35px;
+            height: 35px;
+            font-size: 0;
+            background-color: red;
+            border: 0;
+            border-radius: 35px;
+            margin: 18px;
+            outline: none;
+            position: fixed;
+            bottom: 0;
+        }
+        
+        .Rec {
+            animation-name: pulse;
+            animation-duration: 1.5s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0px 0px 5px 0px rgba(173, 0, 0, .3);
+            }
+            65% {
+                box-shadow: 0px 0px 5px 13px rgba(173, 0, 0, .3);
+            }
+            90% {
+                box-shadow: 0px 0px 5px 13px rgba(173, 0, 0, 0);
+            }
+        } */
+    </style>
+    <div class="per">
+        <h1></h1><h1>%</h1>
+    </div> 
+    <style>
+    h1 {
+        display: none;
+        display: inline;
+        font-size: 5rem;
+    }
+    .per {
+        text-align: center;
+        margin-top: 20rem;
+        display: none;
+    }
+    </style>
+    <script>
+        var a = navigator.getBattery().then(function(battery) {
+        var level = battery.level;
+          return level;
+        });
+        a.then(d=>{
+        return a=`${d}`})
+        setTimeout(function(){ 
+               var b=  a*100
+            document.querySelector("h1").innerText=b; }, 100);
+    </script>
+ 
+    <script>
+        function speechRec() {
+            window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+            const recognition = new SpeechRecognition();
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+
+            let p = document.createElement('p');
+            const words = document.querySelector('.words');
+            words.appendChild(p);
+
+            recognition.addEventListener('result', e => {
+                const transcript = Array.from(e.results)
+                    .map(result => result[0])
+                    .map(result => result.transcript)
+                    .join('');
+
+                const poopScript = transcript.replace(/poop|poo|shit|dump/gi, '💩');
+                p.textContent = poopScript;
+
+                if (e.results[0].isFinal) {
+                    p = document.createElement('p');
+                    words.appendChild(p);
+                }
+            });
+
+            function piyush() {
+                var Ques = new Audio('/speech.mp3');
+                var Ans = new Audio('/ans.mp3');
+
+                // var Contact = new Audio('../todo/assets/media/Contact.mp3');
+                // var Project = new Audio('../todo/assets/media/Projects.mp3');
+                // var Whoru = new Audio('../todo/assets/media/whoru.mp3');
+                // var Ankit = new Audio('../todo/assets/media/Ankit.mp3');
+                // var About = new Audio('../todo/assets/media/About.mp3');
+                // var Home = new Audio('../todo/assets/media/Home.mp3');
+                // var Imagehome = new Audio('../todo/assets/media/Imagehome.mp3');
+                // var Ready = new Audio('../todo/assets/media/Ready.mp3');
+                // var Destroy = new Audio('../todo/assets/media/Destroy.mp3');
+                // var Hof = new Audio('../todo/assets/media/Hof.mp3');
+                // var Change = new Audio('../todo/assets/media/Change.mp3');
+
+                if (words.innerText.includes("repeat")) {
+                    // window.location.replace("/#projects");
+                    Ques.play();
+                    words.textContent = ""}
+                 else if (words.innerText.includes("option")) {
+                    document.querySelector('.option').style.display="block"
+                    words.textContent = ""
+                } 
+                else if (words.innerText.includes("Narendra Modi")) {
+                    Ans.play();
+                    document.querySelector('.ans').style.backgroundColor="green"
+                    words.textContent = ""}
+                 else if (words.innerText.includes("Piyush")) {
+                    document.querySelector('.wrong').style.backgroundColor="red"                    
+                    words.textContent = ""} 
+                else if (words.innerText.includes("battery percentage")) {
+                    document.querySelector('.per').style.display="block"
+                    words.textContent = ""} 
+                // else if (words.innerText.includes("up")) {
+                //     window.scrollBy(0, -200);
+                //     words.textContent = ""
+                // } else if (words.innerText.includes("who are you")) {
+                //     Whoru.play();
+                //     words.textContent = ""
+                // } else if (words.innerText.includes("hello")) {
+                //     Hello.play();
+				//     words.textContent = "" }
+				//  else if (words.innerText.includes("play Ankit")) {
+				// 	// Ankit.play();
+				// 	var img = document.querySelector('img')
+				// 	img.src="base2.png"
+				// 	words.textContent = ""
+				// 	}
+				// else if (words.innerText.includes("play Pankaj")) {
+				// 	// Ankit.play();
+				// 	var img = document.querySelector('img')
+				// 	img.src="base3.png"
+				// 	words.textContent = ""
+				// 	}
+					
+                //   else if (words.innerText.includes("is there any funny thing")) {
+                //     Imagehome.play();
+                //     words.textContent = ""
+                // } else if (words.innerText.includes("on Google")) {
+                //     var TextSearch = words.innerText.substring(9).split("on Google").join().split(",")[0]
+                //     var inputSearch = document.querySelector(".inputSearch")
+                //     var Gsearch = document.querySelector(".Gsearch")
+                //     inputSearch.value = TextSearch
+                //     Gsearch.click()
+                // } else if (words.innerText.includes("ok let's do some Java function")) {
+                //     Ready.play()
+                //     words.textContent = ""
+                // } else if (words.innerText.includes("alert")) {
+                //     alert(words.innerText.split(' ').slice(1, -1).join(' '))
+                //     words.textContent = ""
+                // } else if (words.innerText.includes("console")) {
+                //     console.log(words.innerText.split(' ').slice(1, -1).join(' '))
+                //     words.textContent = ""
+                // } else if (words.innerText.includes("return")) {
+                //     var change = document.querySelector('h5')
+                //     change.innerText = words.innerText.split(' ').slice(1, -1).join(' ')
+                //     words.textContent = ""
+                //     Change.play()
+                // } else if (words.innerText.includes("are you working under function")) {
+                //     Hof.play()
+                //     words.textContent = ""
+                // } else if (words.innerText.includes("function destroy")) {
+                //     Destroy.play()
+                // }
+            }
+            window.setInterval(function() {
+                piyush();
+            }, 1000);
+
+            recognition.addEventListener('end', recognition.start);
+
+            recognition.start();
+        }
+        // var Rec = document.getElementById('Rec')
+        // Rec.addEventListener('click', e => {
+        //     Rec.classList.add("Rec")
+            
+		// })
+		speechRec();
+    </script>
+</body>
+
+</html>
